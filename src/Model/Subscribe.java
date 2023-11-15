@@ -31,4 +31,12 @@ public class Subscribe extends User{
     public int hashCode() {
         return Objects.hash(super.hashCode(), number);
     }
+
+    @Override
+    public String toString() {
+        return "Subscribe{"+"id="+ getId() + ",name ="+getName()+",firstName="+getfirstName()
+        +",email="+getEmail()+",genre="+getGenre()+
+                ",number='" + number + '\'' +
+                '}';
+    }
 }

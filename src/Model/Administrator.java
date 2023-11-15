@@ -48,6 +48,16 @@ public class Administrator extends User{
     }
 
     @Override
+    public String toString() {
+        return "Administrator{"+"id="+ getId() + ",name ="+getName()+",firstName="+getfirstName()
+                +",email="+getEmail()+",genre="+getGenre()+
+                "role='" + role + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), role, userName, password);
     }
