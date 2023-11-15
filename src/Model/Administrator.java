@@ -7,7 +7,7 @@ public class Administrator extends User{
     private String userName;
     private String password;
 
-    public Administrator(String id, String name, String firstName, String email, String genre, String role, String userName, String password) {
+    public Administrator(int id, String name, String firstName, String email, String genre, String role, String userName, String password) {
         super(id, name, firstName, email, genre);
         this.role = role;
         this.userName = userName;
