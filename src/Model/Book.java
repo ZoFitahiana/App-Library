@@ -6,16 +6,16 @@ import java.util.Objects;
 public class Book {
     private int id;
     private String bookName;
-    private String author;
+    private int idAuthor;
     private int pageNumbres;
     private String topic;
     private Date releaseDate;
     private  String status;
 
-    public Book(int id, String bookName, String author, int pageNumbres, String topic, Date releaseDate, String status) {
+    public Book(int id, String bookName, int idAuthor, int pageNumbres, String topic, Date releaseDate, String status) {
         this.id = id;
         this.bookName = bookName;
-        this.author = author;
+        this.idAuthor = idAuthor;
         this.pageNumbres = pageNumbres;
         this.topic = topic;
         this.releaseDate = releaseDate;
@@ -38,12 +38,12 @@ public class Book {
         this.bookName = bookName;
     }
 
-    public String getAuthor() {
-        return author;
+    public int getAuthor() {
+        return idAuthor;
     }
 
     public void setAuthor(String author) {
-        this.author = author;
+        this.idAuthor = idAuthor;
     }
 
     public int getPageNumbres() {
@@ -83,11 +83,11 @@ public class Book {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return id == book.id && pageNumbres == book.pageNumbres && Objects.equals(bookName, book.bookName) && Objects.equals(author, book.author) && Objects.equals(topic, book.topic) && Objects.equals(releaseDate, book.releaseDate) && Objects.equals(status, book.status);
+        return id == book.id && pageNumbres == book.pageNumbres && Objects.equals(bookName, book.bookName) && Objects.equals(idAuthor, book.idAuthor) && Objects.equals(topic, book.topic) && Objects.equals(releaseDate, book.releaseDate) && Objects.equals(status, book.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, bookName, author, pageNumbres, topic, releaseDate, status);
+        return Objects.hash(id, bookName, idAuthor, pageNumbres, topic, releaseDate, status);
     }
 }
