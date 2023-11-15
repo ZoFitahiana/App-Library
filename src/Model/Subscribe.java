@@ -2,10 +2,10 @@ package Model;
 
 import java.util.Objects;
 
-public class Subcribe extends User{
+public class Subscribe extends User{
     private String number;
 
-    public Subcribe(int id, String name, String firstName, String email, String genre, String number) {
+    public Subscribe(int id, String name, String firstName, String email, String genre, String number) {
         super(id, name, firstName, email, genre);
         this.number = number;
     }
@@ -23,7 +23,7 @@ public class Subcribe extends User{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        Subcribe subcribe = (Subcribe) o;
+        Subscribe subcribe = (Subscribe) o;
         return Objects.equals(number, subcribe.number);
     }
 
