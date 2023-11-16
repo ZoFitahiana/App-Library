@@ -1,10 +1,14 @@
+--create type topic
+CREATE TYPE Topic AS ENUM ('COMEDY', 'ROMANCE', 'OTHER');
 -- Création de la table book
+
+
 CREATE TABLE IF NOT EXISTS Book (
     id SERIAL PRIMARY KEY,
     book_name VARCHAR(250),
     id_author INT REFERENCES Author(id),
     page_number INT,
-    topic VARCHAR(10) CHECK (topic IN ('COMEDY', 'ROMANCE', 'OTHER')),
+    topic Topic,
     release_date DATE,
     status VARCHAR(10) CHECK (status IN ('emprunt', 'rendu'))
 );
