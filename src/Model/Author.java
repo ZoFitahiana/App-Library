@@ -6,9 +6,9 @@ public class Author {
     private int id ;
     private String name;
     private String first_name;
-    private String sex;
+    private char sex;
 
-    public Author(int id, String name, String first_name, String sex) {
+    public Author(int id, String name, String first_name, char sex) {
         this.id = id;
         this.name = name;
         this.first_name = first_name;
@@ -19,31 +19,31 @@ public class Author {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getFirstName() {
-        return first_name;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setFirstName(String firstName) {
-        this.first_name = firstName;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setSex(String sex) {
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
+    }
+
+    public char getSex() {
+        return sex;
+    }
+
+    public void setSex(char sex) {
         this.sex = sex;
     }
 
@@ -52,7 +52,7 @@ public class Author {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Author author = (Author) o;
-        return id == author.id && Objects.equals(name, author.name) && Objects.equals(first_name, author.first_name) && Objects.equals(sex, author.sex);
+        return id == author.id && sex == author.sex && Objects.equals(name, author.name) && Objects.equals(first_name, author.first_name);
     }
 
     @Override
