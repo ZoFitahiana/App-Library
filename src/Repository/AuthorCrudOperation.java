@@ -9,14 +9,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class AuthorCrudOperation implements CrudOperations{
+public class AuthorCrudOperation implements CrudOperations<Author>{
     private static Connection connection;
     public static void getConnection() {
         ConnectionDB Db = new ConnectionDB();
         connection = Db.createConnection();
     }
     @Override
-    public List findAll() {
+    public List<Author> findAll() {
         getConnection();
         try {
             String sql = "select * from author";
@@ -30,9 +30,9 @@ public class AuthorCrudOperation implements CrudOperations{
                 String sex = resultSet.getString("sex");
                 System.out.println(
                         "Author { id : "+id+
-                                "name : "+name+
-                                "first_name"+first_name+
-                                "sex : "+ sex+
+                                ", name : "+name+
+                                ", first_name: "+first_name+
+                                ", sex : "+ sex+
                                 "};"
                 );
             }
@@ -41,12 +41,10 @@ public class AuthorCrudOperation implements CrudOperations{
         }
         return null;
     }
-
     @Override
-    public List<Author> saveAll(List toSave) {
+    public List<Author> saveAll(List<Author> author) {
         getConnection();
         try {
-            List<Author> author = (List<Author>) toSave;
             for (Author authors:author){
                 String sql = "INSERT INTO Author (name, first_name, sex) VALUES (?,?,?)";
                 PreparedStatement statement = connection.prepareStatement(sql);
@@ -63,11 +61,11 @@ public class AuthorCrudOperation implements CrudOperations{
         return null;
     }
 
+
     @Override
-    public Object save(Object toSave) {
+    public Author save(Author author) {
         getConnection();
         try{
-            Author author = (Author) toSave;
             String sql = "INSERT INTO Author (name, first_name, sex) VALUES (?,?,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1,author.getName());
@@ -80,15 +78,13 @@ public class AuthorCrudOperation implements CrudOperations{
         }
         return null;
     }
-
     @Override
-    public Object delete(Object toDelete) {
+    public Author delete(Author toDelete) {
         getConnection();
         try {
-            Author author = (Author) toDelete;
             String sql = "delete from author where id = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1,author.getId());
+            statement.setInt(1,toDelete.getId());
             int row = statement.executeUpdate();
             System.out.println("Deleted Author successfully !");
         } catch (SQLException e) {

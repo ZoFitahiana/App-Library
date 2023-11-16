@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class SubscribeCrudOperation implements CrudOperations{
+public class SubscribeCrudOperation implements CrudOperations<Subscribe>{
     private static Connection connection;
     public static void getConnection() {
         ConnectionDB Db = new ConnectionDB();
@@ -49,10 +49,31 @@ public class SubscribeCrudOperation implements CrudOperations{
     }
 
     @Override
-    public List<Subscribe> saveAll(List toSave) {
+    public Subscribe save(Subscribe subscribes) {
         getConnection();
         try{
-            List<Subscribe> subscribe = (List<Subscribe>) toSave;
+            String sql = "INSERT INTO Subscribe(name, first_name, email, genre, number) VALUES(?,?,?,?,?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, subscribes.getName());
+            statement.setString(2,subscribes.getFirstName());
+            statement.setString(3, subscribes.getEmail());
+            statement.setObject(4,subscribes.getGenre());
+            statement.setString(5, subscribes.getNumber());
+            int rows = statement.executeUpdate();
+            System.out.println("Add new Subscribe successfully");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+
+    }
+
+
+
+    @Override
+    public List<Subscribe> saveAll(List<Subscribe> subscribe) {
+        getConnection();
+        try{
             for (Subscribe subscribes : subscribe){
                 String sql = "INSERT INTO Subscribe(name, first_name, email, genre, number) VALUES(?,?,?,?,?)";
                 PreparedStatement statement = connection.prepareStatement(sql);
@@ -71,30 +92,9 @@ public class SubscribeCrudOperation implements CrudOperations{
     }
 
     @Override
-    public Object save(Object toSave) {
+    public Subscribe delete(Subscribe subscribe) {
         getConnection();
         try{
-           Subscribe subscribes = (Subscribe) toSave;
-            String sql = "INSERT INTO Subscribe(name, first_name, email, genre, number) VALUES(?,?,?,?,?)";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, subscribes.getName());
-            statement.setString(2,subscribes.getFirstName());
-            statement.setString(3, subscribes.getEmail());
-            statement.setObject(4,subscribes.getGenre());
-            statement.setString(5, subscribes.getNumber());
-            int rows = statement.executeUpdate();
-            System.out.println("Add new Subscribe successfully");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
-
-    @Override
-    public Object delete(Object toDelete) {
-        getConnection();
-        try{
-            Subscribe subscribe = (Subscribe) toDelete;
             String sql = "delete from subscribe where id = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1,subscribe.getId());

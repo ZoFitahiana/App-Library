@@ -5,7 +5,7 @@ import Model.Book;
 import java.sql.*;
 import java.util.List;
 
-public class BookCrudOperations implements CrudOperations {
+public class BookCrudOperations implements CrudOperations<Book> {
     private static Connection connection;
     public static void getConnection() {
         ConnectionDB Db = new ConnectionDB();
@@ -46,10 +46,29 @@ public class BookCrudOperations implements CrudOperations {
     }
 
     @Override
-    public List<Book> saveAll(List toSave)  {
+    public Book save(Book books) {
+        getConnection();
+        try {
+            String sql = "insert into book (book_name, id_author, page_number, topic, release_date, status) values (?,?,?,?,?,?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1,books.getBookName());
+            statement.setInt(2,books.getId_author());
+            statement.setInt(3,books.getPage_number());
+            statement.setObject(4, books.getTopic().name(),Types.OTHER);
+            statement.setDate(5,books.getRelease_date());
+            statement.setString(6,books.getStatus());
+            int row= statement.executeUpdate();
+            System.out.println("Add Book successfully !");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Book> saveAll(List<Book> book)  {
         getConnection();
        try {
-           List<Book> book = (List<Book>) toSave;
            System.out.println("Add list of Books successfully !");
            for (Book books:book){
                String sql = "insert into book (book_name, id_author, page_number, topic, release_date, status) values (?,?,?,?,?,?)";
@@ -68,33 +87,10 @@ public class BookCrudOperations implements CrudOperations {
        }
         return null;
     }
-
     @Override
-    public Object save(Object toSave) {
+    public Book delete(Book book) {
         getConnection();
         try {
-            Book books = (Book) toSave;
-            String sql = "insert into book (book_name, id_author, page_number, topic, release_date, status) values (?,?,?,?,?,?)";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1,books.getBookName());
-            statement.setInt(2,books.getId_author());
-            statement.setInt(3,books.getPage_number());
-            statement.setObject(4, books.getTopic().name(),Types.OTHER);
-            statement.setDate(5,books.getRelease_date());
-            statement.setString(6,books.getStatus());
-            int row= statement.executeUpdate();
-            System.out.println("Add Book successfully !");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
-
-    @Override
-    public Object delete(Object toDelete) {
-        getConnection();
-        try {
-            Book book = (Book) toDelete;
             String sql = "delete from book where id = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1,book.getId());
@@ -105,4 +101,5 @@ public class BookCrudOperations implements CrudOperations {
         }
         return null;
     }
+
 }
