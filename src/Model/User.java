@@ -7,10 +7,9 @@ public class User {
     private String name;
     private String firstName;
     private String email ;
-    private String genre ;
+    private char genre ;
 
-
-    public User(int id, String name, String firstName, String email, String genre) {
+    public User(int id, String name, String firstName, String email, char genre) {
         this.id = id;
         this.name = name;
         this.firstName = firstName;
@@ -22,48 +21,40 @@ public class User {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getfirstName() {
-        return firstName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setfirstName(String firstName) {
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public char getGenre() {
+        return genre;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(firstName, user.firstName) && Objects.equals(email, user.email) && Objects.equals(genre, user.genre);
+    public void setGenre(char genre) {
+        this.genre = genre;
     }
 
     @Override
@@ -75,10 +66,5 @@ public class User {
                 ", email='" + email + '\'' +
                 ", genre='" + genre + '\'' +
                 '}';
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, firstName, email, genre);
     }
 }
