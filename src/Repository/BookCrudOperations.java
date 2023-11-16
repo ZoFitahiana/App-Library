@@ -50,7 +50,7 @@ public class BookCrudOperations implements CrudOperations {
         getConnection();
        try {
            List<Book> book = (List<Book>) toSave;
-           System.out.println("This list of book is added:");
+           System.out.println("Add list of Books successfully !");
            for (Book books:book){
                String sql = "insert into book (book_name, id_author, page_number, topic, release_date, status) values (?,?,?,?,?,?)";
                PreparedStatement statement = connection.prepareStatement(sql);
@@ -61,7 +61,6 @@ public class BookCrudOperations implements CrudOperations {
                statement.setDate(5,books.getRelease_date());
                statement.setString(6,books.getStatus());
                int row= statement.executeUpdate();
-               System.out.println(books);
            }
 
        } catch (SQLException e) {
@@ -84,8 +83,7 @@ public class BookCrudOperations implements CrudOperations {
             statement.setDate(5,books.getRelease_date());
             statement.setString(6,books.getStatus());
             int row= statement.executeUpdate();
-            System.out.println("This book is added: ");
-            System.out.println(books);
+            System.out.println("Add Book successfully !");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -101,8 +99,7 @@ public class BookCrudOperations implements CrudOperations {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1,book.getId());
             int row = statement.executeUpdate();
-            System.out.println("This book is deleted :");
-            System.out.println(book);
+            System.out.println("Deleted Book successfully !");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
