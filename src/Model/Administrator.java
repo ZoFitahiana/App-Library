@@ -47,4 +47,17 @@ public class Administrator extends User{
                 ", password='" + password + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Administrator that = (Administrator) object;
+        return Objects.equals(role, that.role) && Objects.equals(userName, that.userName) && Objects.equals(password, that.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(role, userName, password);
+    }
 }

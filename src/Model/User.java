@@ -67,4 +67,17 @@ public class User {
                 ", genre='" + genre + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        User user = (User) object;
+        return id == user.id && genre == user.genre && Objects.equals(name, user.name) && Objects.equals(firstName, user.firstName) && Objects.equals(email, user.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, firstName, email, genre);
+    }
 }
