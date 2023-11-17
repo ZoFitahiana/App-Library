@@ -10,8 +10,8 @@ CREATE TABLE IF NOT EXISTS  Subscribe(
 );
 
 -- insert to subcriber
-INSERT INTO Subscribe(id, name, first_name, email, genre, number) VALUES
-    (1, 'Doe', 'John', 'john.doe@example.com', 'M', '123456789'),
-    (2, 'Smith', 'Jane', 'jane.smith@example.com', 'F', '987654321'),
-    (3, 'Johnson', 'Bob', 'bob.johnson@example.com', 'M', '555555555');
+INSERT INTO Subscribe(name, first_name, email, genre, number) VALUES
+    ('Doe', 'John', 'john.doe@example.com', 'M', '123456789'),
+    ('Smith', 'Jane', 'jane.smith@example.com', 'F', '987654321'),
+    ('Johnson', 'Bob', 'bob.johnson@example.com', 'M', '555555555');
 
